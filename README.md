@@ -221,6 +221,38 @@ Proyecto publicado en GitHub y en desarrollo local.
 
 ![Dashboard de VetControlWeb](docs/imagenes/dashboard.png)
 
+## Módulos del sistema
+
+### 1. Gestión de propietarios
+
+Permite registrar, consultar, editar y administrar la información de los propietarios de las mascotas.
+
+![Gestión de propietarios](docs/imagenes/propietarios.png)
+
+### 2. Gestión de mascotas
+
+Permite administrar los datos de las mascotas y asociarlas con sus respectivos propietarios.
+
+![Gestión de mascotas](docs/imagenes/mascotas.png)
+
+### 3. Gestión de citas
+
+Permite gestionar las citas veterinarias, incluyendo la fecha, hora, mascota, propietario y servicio solicitado.
+
+![Gestión de citas](docs/imagenes/citas.png)
+
+### 4. Gestión de servicios
+
+Permite administrar los servicios veterinarios, sus precios, duración y estado.
+
+![Gestión de servicios](docs/imagenes/servicios.png)
+
+### 5. Gestión de solicitudes
+
+Permite registrar y realizar seguimiento de las solicitudes de atención veterinaria.
+
+![Gestión de solicitudes](docs/imagenes/solicitudes.png)
+
 **Repositorio oficial:**
 
 https://github.com/santiman0408-sudo/VetControlWeb
