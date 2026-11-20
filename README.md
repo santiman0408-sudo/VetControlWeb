@@ -209,6 +209,18 @@ Gestión de Proyectos Ágiles
 
 Proyecto publicado en GitHub y en desarrollo local.
 
+---
+
+## Capturas de pantalla del sistema
+
+### Inicio de sesión
+
+![Login de VetControlWeb](docs/imagenes/login.png)
+
+### Panel principal (Dashboard)
+
+![Dashboard de VetControlWeb](docs/imagenes/dashboard.png)
+
 **Repositorio oficial:**
 
 https://github.com/santiman0408-sudo/VetControlWeb
