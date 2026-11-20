@@ -25,42 +25,110 @@ interface RespuestaEstadisticas {
   estadisticas: Estadisticas
 }
 
-const API_URL = 'http://localhost:4000/api/dashboard/estadisticas'
+interface Cita {
+  id: number
+  mascota_id: number
+  servicio_id: number
+  usuario_id: number
+  fecha: string
+  hora: string
+  motivo: string
+  estado: string
+  fecha_registro: string
+  mascota_nombre: string
+  mascota_especie: string
+  propietario_nombres: string
+  propietario_apellidos: string
+  servicio_nombre: string
+  usuario_nombre: string
+}
 
-const recentAppointments = [
-  {
-    id: 1,
-    pet: 'Max',
-    owner: 'Carlos Mendoza',
-    service: 'Consulta general',
-    time: '09:00 AM',
-    status: 'Confirmada',
-  },
-  {
-    id: 2,
-    pet: 'Luna',
-    owner: 'María Torres',
-    service: 'Vacunación',
-    time: '10:30 AM',
-    status: 'Pendiente',
-  },
-  {
-    id: 3,
-    pet: 'Rocky',
-    owner: 'José Ramírez',
-    service: 'Control médico',
-    time: '11:00 AM',
-    status: 'Confirmada',
-  },
-  {
-    id: 4,
-    pet: 'Mia',
-    owner: 'Ana Flores',
-    service: 'Desparasitación',
-    time: '12:00 PM',
-    status: 'Pendiente',
-  },
-]
+interface RespuestaCitas {
+  success: boolean
+  total: number
+  citas: Cita[]
+}
+
+const API_BASE = 'http://localhost:4000/api'
+
+function formatearHora(hora: string): string {
+  if (!hora) return '--:--'
+
+  const partes = hora.split(':')
+  const horas = Number(partes[0])
+  const minutos = partes[1] || '00'
+
+  if (Number.isNaN(horas)) return hora
+
+  const periodo = horas >= 12 ? 'PM' : 'AM'
+  const horaFormato = horas % 12 || 12
+
+  return `${String(horaFormato).padStart(2, '0')}:${minutos} ${periodo}`
+}
+
+function formatearFecha(fecha: string): string {
+  if (!fecha) return 'Sin fecha'
+
+  // Separamos los componentes para evitar cambios de día por zona horaria.
+  const partes = fecha.split('T')[0].split('-')
+
+  if (partes.length !== 3) return fecha
+
+  const [anio, mes, dia] = partes
+
+  return `${dia}/${mes}/${anio}`
+}
+
+function formatearEstado(estado: string): string {
+  if (!estado) return 'Sin estado'
+
+  return estado
+    .toLowerCase()
+    .replace(/_/g, ' ')
+    .replace(/\b\w/g, (letra) => letra.toUpperCase())
+}
+
+function obtenerEstiloEstado(estado: string): {
+  backgroundColor: string
+  color: string
+} {
+  const estadoNormalizado = estado.toUpperCase()
+
+  switch (estadoNormalizado) {
+    case 'PENDIENTE':
+      return {
+        backgroundColor: '#fef3c7',
+        color: '#92400e',
+      }
+
+    case 'CONFIRMADA':
+    case 'CONFIRMADO':
+      return {
+        backgroundColor: '#dcfce7',
+        color: '#166534',
+      }
+
+    case 'FINALIZADA':
+    case 'FINALIZADO':
+      return {
+        backgroundColor: '#dbeafe',
+        color: '#1e40af',
+      }
+
+    default:
+      return {
+        backgroundColor: '#f1f5f9',
+        color: '#475569',
+      }
+  }
+}
+
+function obtenerFechaHora(cita: Cita): number {
+  const fecha = cita.fecha?.split('T')[0] || ''
+  const hora = cita.hora || '00:00:00'
+
+  return new Date(`${fecha}T${hora}`).getTime() || 0
+}
 
 export default function Dashboard() {
   const [estadisticas, setEstadisticas] = useState<Estadisticas>({
@@ -70,31 +138,35 @@ export default function Dashboard() {
     citasHoy: 0,
   })
 
+  const [citas, setCitas] = useState<Cita[]>([])
   const [cargando, setCargando] = useState(true)
+  const [cargandoCitas, setCargandoCitas] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [errorCitas, setErrorCitas] = useState<string | null>(null)
 
   useEffect(() => {
+    const token = window.localStorage.getItem('token')
+
+    if (!token) {
+      setError('No existe una sesión activa. Inicia sesión nuevamente.')
+      setErrorCitas('No existe una sesión activa.')
+      setCargando(false)
+      setCargandoCitas(false)
+      return
+    }
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    }
+
     const obtenerEstadisticas = async () => {
       try {
         setCargando(true)
         setError(null)
 
-        // Recuperar el token JWT de la sesión.
-        const token = window.localStorage.getItem('token')
-
-        if (!token) {
-          setError('No existe una sesión activa. Inicia sesión nuevamente.')
-          return
-        }
-
-        // Consultar estadísticas enviando el token JWT.
         const respuesta = await axios.get<RespuestaEstadisticas>(
-          API_URL,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          `${API_BASE}/dashboard/estadisticas`,
+          { headers }
         )
 
         if (respuesta.data.success) {
@@ -107,11 +179,11 @@ export default function Dashboard() {
 
         if (axios.isAxiosError(err)) {
           if (err.response?.status === 401) {
-            setError('Tu sesión ha expirado o el token no es válido. Inicia sesión nuevamente.')
+            setError('Tu sesión ha expirado. Inicia sesión nuevamente.')
           } else {
             setError(
               err.response?.data?.message ||
-                'No se pudo conectar con el servidor.'
+                'No se pudieron cargar las estadísticas.'
             )
           }
         } else {
@@ -122,7 +194,54 @@ export default function Dashboard() {
       }
     }
 
+    const obtenerCitas = async () => {
+      try {
+        setCargandoCitas(true)
+        setErrorCitas(null)
+
+        const respuesta = await axios.get<RespuestaCitas>(
+          `${API_BASE}/citas`,
+          {
+            headers,
+            params: {
+              _t: Date.now(),
+            },
+          }
+        )
+
+        if (respuesta.data.success) {
+          const citasOrdenadas = [...respuesta.data.citas].sort(
+            (a, b) => obtenerFechaHora(b) - obtenerFechaHora(a)
+          )
+
+          setCitas(citasOrdenadas.slice(0, 4))
+        } else {
+          setErrorCitas('No se pudieron obtener las citas.')
+        }
+      } catch (err) {
+        console.error('Error al cargar citas recientes:', err)
+
+        if (axios.isAxiosError(err)) {
+          if (err.response?.status === 401) {
+            setErrorCitas(
+              'Tu sesión ha expirado. Inicia sesión nuevamente.'
+            )
+          } else {
+            setErrorCitas(
+              err.response?.data?.message ||
+                'No se pudieron cargar las citas recientes.'
+            )
+          }
+        } else {
+          setErrorCitas('Ocurrió un error inesperado al cargar las citas.')
+        }
+      } finally {
+        setCargandoCitas(false)
+      }
+    }
+
     obtenerEstadisticas()
+    obtenerCitas()
   }, [])
 
   return (
@@ -169,7 +288,11 @@ export default function Dashboard() {
 
         <StatCard
           title="Solicitudes pendientes"
-          value={cargando ? '...' : String(estadisticas.solicitudesPendientes)}
+          value={
+            cargando
+              ? '...'
+              : String(estadisticas.solicitudesPendientes)
+          }
           description="Por atender"
           icon={Clock}
           color="#d97706"
@@ -207,40 +330,78 @@ export default function Dashboard() {
                   <th>Mascota</th>
                   <th>Propietario</th>
                   <th>Servicio</th>
+                  <th>Fecha</th>
                   <th>Hora</th>
                   <th>Estado</th>
                 </tr>
               </thead>
 
               <tbody>
-                {recentAppointments.map((appointment) => (
-                  <tr key={appointment.id}>
-                    <td>
-                      <div className="pet-cell">
-                        <div className="pet-avatar">
-                          <PawPrint size={17} />
-                        </div>
-                        <strong>{appointment.pet}</strong>
-                      </div>
-                    </td>
-
-                    <td>{appointment.owner}</td>
-                    <td>{appointment.service}</td>
-                    <td>{appointment.time}</td>
-
-                    <td>
-                      <span
-                        className={`status-badge ${
-                          appointment.status === 'Confirmada'
-                            ? 'confirmed'
-                            : 'pending'
-                        }`}
-                      >
-                        {appointment.status}
-                      </span>
+                {cargandoCitas ? (
+                  <tr>
+                    <td colSpan={6}>
+                      Cargando citas recientes...
                     </td>
                   </tr>
-                ))}
+                ) : errorCitas ? (
+                  <tr>
+                    <td colSpan={6}>
+                      {errorCitas}
+                    </td>
+                  </tr>
+                ) : citas.length === 0 ? (
+                  <tr>
+                    <td colSpan={6}>
+                      No hay citas registradas.
+                    </td>
+                  </tr>
+                ) : (
+                  citas.map((appointment) => (
+                    <tr key={appointment.id}>
+                      <td>
+                        <div className="pet-cell">
+                          <div className="pet-avatar">
+                            <PawPrint size={17} />
+                          </div>
+
+                          <strong>
+                            {appointment.mascota_nombre || 'Sin nombre'}
+                          </strong>
+                        </div>
+                      </td>
+
+                      <td>
+                        {[
+                          appointment.propietario_nombres,
+                          appointment.propietario_apellidos,
+                        ]
+                          .filter(Boolean)
+                          .join(' ') || 'Sin propietario'}
+                      </td>
+
+                      <td>
+                        {appointment.servicio_nombre || 'Sin servicio'}
+                      </td>
+
+                      <td>
+                        {formatearFecha(appointment.fecha)}
+                      </td>
+
+                      <td>
+                        {formatearHora(appointment.hora)}
+                      </td>
+
+                      <td>
+                        <span
+                          className="status-badge"
+                          style={obtenerEstiloEstado(appointment.estado)}
+                        >
+                          {formatearEstado(appointment.estado)}
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
@@ -259,10 +420,12 @@ export default function Dashboard() {
               <div className="quick-action-icon blue">
                 <Users size={21} />
               </div>
+
               <div>
                 <strong>Nuevo propietario</strong>
                 <span>Registrar cliente</span>
               </div>
+
               <ArrowRight size={17} />
             </Link>
 
@@ -270,10 +433,12 @@ export default function Dashboard() {
               <div className="quick-action-icon green">
                 <PawPrint size={21} />
               </div>
+
               <div>
                 <strong>Nueva mascota</strong>
                 <span>Registrar paciente</span>
               </div>
+
               <ArrowRight size={17} />
             </Link>
 
@@ -281,10 +446,12 @@ export default function Dashboard() {
               <div className="quick-action-icon purple">
                 <CalendarDays size={21} />
               </div>
+
               <div>
                 <strong>Nueva cita</strong>
                 <span>Programar atención</span>
               </div>
+
               <ArrowRight size={17} />
             </Link>
 
@@ -292,10 +459,12 @@ export default function Dashboard() {
               <div className="quick-action-icon orange">
                 <Plus size={21} />
               </div>
+
               <div>
                 <strong>Nueva solicitud</strong>
                 <span>Registrar solicitud</span>
               </div>
+
               <ArrowRight size={17} />
             </Link>
           </div>
