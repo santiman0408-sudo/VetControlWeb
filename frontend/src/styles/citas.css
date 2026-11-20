@@ -1,0 +1,564 @@
+/* ============================================
+   VETCONTROL WEB - GESTIÓN DE CITAS
+============================================ */
+
+.citas-container {
+  width: 100%;
+  padding: 28px;
+  color: #1e293b;
+  box-sizing: border-box;
+}
+
+/* ============================================
+   CABECERA
+============================================ */
+
+.citas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.citas-header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.citas-header p {
+  margin: 8px 0 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.btn-cita-nueva {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-cita-nueva:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   ALERTAS
+============================================ */
+
+.citas-alerta {
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.citas-alerta-exito {
+  color: #166534;
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+}
+
+.citas-alerta-error {
+  color: #991b1b;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+}
+
+/* ============================================
+   ESTADÍSTICAS
+============================================ */
+
+.citas-estadisticas {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.citas-stat-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
+}
+
+.citas-stat-card span {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.citas-stat-card strong {
+  font-size: 30px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* ============================================
+   FORMULARIO
+============================================ */
+
+.citas-formulario-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  margin-bottom: 28px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+.citas-formulario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 26px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.citas-formulario-header h2 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.citas-formulario-header button {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: #e2e8f0;
+  color: #475569;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.citas-formulario-header button:hover {
+  background: #cbd5e1;
+}
+
+.citas-formulario {
+  padding: 26px;
+}
+
+.citas-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.citas-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.citas-campo-completo {
+  grid-column: 1 / -1;
+}
+
+.citas-campo label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.citas-campo input,
+.citas-campo select,
+.citas-campo textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  background: #fff;
+  color: #1e293b;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.citas-campo input:focus,
+.citas-campo select:focus,
+.citas-campo textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.citas-campo textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.citas-campo small {
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* ============================================
+   ACCIONES DEL FORMULARIO
+============================================ */
+
+.citas-formulario-acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.btn-cita-cancelar,
+.btn-cita-guardar {
+  border: none;
+  border-radius: 9px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-cita-cancelar {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.btn-cita-cancelar:hover {
+  background: #e2e8f0;
+}
+
+.btn-cita-guardar {
+  background: #2563eb;
+  color: #fff;
+}
+
+.btn-cita-guardar:hover {
+  background: #1d4ed8;
+}
+
+.btn-cita-guardar:disabled,
+.btn-cita-cancelar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   LISTADO Y FILTROS
+============================================ */
+
+.citas-listado-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+.citas-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 22px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.citas-toolbar input,
+.citas-toolbar select {
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  background: #fff;
+  font-size: 14px;
+  color: #334155;
+  outline: none;
+}
+
+.citas-toolbar input {
+  flex: 1;
+  min-width: 0;
+}
+
+.citas-toolbar select {
+  min-width: 190px;
+}
+
+.citas-toolbar input:focus,
+.citas-toolbar select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* ============================================
+   TABLA
+============================================ */
+
+.citas-tabla-contenedor {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.citas-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 850px;
+}
+
+.citas-tabla thead {
+  background: #f8fafc;
+}
+
+.citas-tabla th {
+  padding: 16px 18px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.citas-tabla td {
+  padding: 17px 18px;
+  font-size: 13px;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.citas-tabla tbody tr:hover {
+  background: #f8fafc;
+}
+
+.citas-tabla tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.citas-tabla td strong {
+  display: block;
+  font-size: 14px;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.citas-tabla td small {
+  display: block;
+  margin-top: 5px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* ============================================
+   ESTADOS
+============================================ */
+
+.citas-estado {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.estado-pendiente {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.estado-confirmada {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.estado-finalizada {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.estado-cancelada {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ============================================
+   ACCIONES DE TABLA
+============================================ */
+
+.citas-acciones {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-cita-editar,
+.btn-cita-eliminar {
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-cita-editar {
+  background: #eff6ff;
+}
+
+.btn-cita-editar:hover {
+  background: #dbeafe;
+}
+
+.btn-cita-eliminar {
+  background: #fef2f2;
+}
+
+.btn-cita-eliminar:hover {
+  background: #fee2e2;
+}
+
+/* ============================================
+   ESTADO VACÍO Y CARGA
+============================================ */
+
+.citas-vacio {
+  padding: 55px 20px;
+  text-align: center;
+  color: #64748b;
+}
+
+.citas-vacio span {
+  display: block;
+  font-size: 36px;
+  margin-bottom: 14px;
+}
+
+.citas-vacio h3 {
+  margin: 0 0 8px;
+  font-size: 17px;
+  color: #334155;
+}
+
+.citas-vacio p {
+  margin: 0;
+  font-size: 13px;
+}
+
+/* ============================================
+   PIE DEL LISTADO
+============================================ */
+
+.citas-footer {
+  padding: 17px 22px;
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* ============================================
+   RESPONSIVE
+============================================ */
+
+@media (max-width: 1100px) {
+  .citas-estadisticas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .citas-container {
+    padding: 18px;
+  }
+
+  .citas-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-cita-nueva {
+    width: 100%;
+  }
+
+  .citas-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .citas-campo-completo {
+    grid-column: auto;
+  }
+
+  .citas-formulario {
+    padding: 18px;
+  }
+
+  .citas-formulario-header {
+    padding: 18px;
+  }
+
+  .citas-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .citas-toolbar input,
+  .citas-toolbar select {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .citas-container {
+    padding: 12px;
+  }
+
+  .citas-header h1 {
+    font-size: 23px;
+  }
+
+  .citas-estadisticas {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .citas-stat-card {
+    padding: 18px;
+  }
+
+  .citas-formulario-acciones {
+    flex-direction: column-reverse;
+  }
+
+  .btn-cita-cancelar,
+  .btn-cita-guardar {
+    width: 100%;
+  }
+}

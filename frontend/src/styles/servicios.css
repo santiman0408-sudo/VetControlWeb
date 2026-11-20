@@ -1,0 +1,274 @@
+.servicios-container {
+  padding: 30px;
+  color: #1f2937;
+  font-family: Arial, sans-serif;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+.servicios-header {
+  margin-bottom: 25px;
+}
+
+.servicios-header h1 {
+  font-size: 28px;
+  margin: 0 0 8px;
+  color: #0f172a;
+}
+
+.servicios-header p {
+  color: #64748b;
+  margin: 0;
+}
+
+.servicios-alerta {
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.servicios-formulario,
+.servicios-tabla-section {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.06);
+}
+
+.servicios-formulario h2,
+.servicios-tabla-section h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.servicios-grid-form {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.servicios-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.servicios-campo label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.servicios-campo input,
+.servicios-campo textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  font-size: 14px;
+  outline: none;
+  background: #ffffff;
+}
+
+.servicios-campo input:focus,
+.servicios-campo textarea:focus {
+  border-color: #0f766e;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+}
+
+.servicios-campo textarea {
+  resize: vertical;
+}
+
+.servicios-campo-completo {
+  grid-column: 1 / -1;
+}
+
+.servicios-form-acciones {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+.servicios-btn {
+  padding: 11px 18px;
+  border: none;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.servicios-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.servicios-btn-primary {
+  background: #0f766e;
+  color: white;
+}
+
+.servicios-btn-primary:hover {
+  background: #115e59;
+}
+
+.servicios-btn-secondary {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.servicios-btn-secondary:hover {
+  background: #cbd5e1;
+}
+
+.servicios-tabla-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.servicios-total {
+  background: #ccfbf1;
+  color: #115e59;
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.servicios-tabla-contenedor {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.servicios-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 750px;
+}
+
+.servicios-tabla thead {
+  background: #f1f5f9;
+}
+
+.servicios-tabla th {
+  color: #475569;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.servicios-tabla th,
+.servicios-tabla td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.servicios-tabla td {
+  font-size: 14px;
+}
+
+.servicios-tabla tbody tr:hover {
+  background: #f8fafc;
+}
+
+.servicios-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.servicios-badge.activo {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.servicios-badge.inactivo {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.servicios-acciones {
+  display: flex;
+  gap: 7px;
+}
+
+.servicios-btn-editar,
+.servicios-btn-eliminar {
+  border: none;
+  padding: 7px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.servicios-btn-editar {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.servicios-btn-editar:hover {
+  background: #bfdbfe;
+}
+
+.servicios-btn-eliminar {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.servicios-btn-eliminar:hover {
+  background: #fecaca;
+}
+
+.servicios-loading,
+.servicios-vacio {
+  text-align: center;
+  padding: 35px 20px;
+  color: #64748b;
+}
+
+.servicios-vacio h3 {
+  color: #334155;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 900px) {
+  .servicios-grid-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .servicios-container {
+    padding: 15px;
+  }
+
+  .servicios-formulario,
+  .servicios-tabla-section {
+    padding: 18px;
+  }
+
+  .servicios-grid-form {
+    grid-template-columns: 1fr;
+  }
+
+  .servicios-tabla-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

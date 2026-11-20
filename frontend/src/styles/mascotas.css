@@ -1,0 +1,639 @@
+/* =========================================================
+   VETCONTROL WEB
+   MÓDULO MASCOTAS - DISEÑO PROFESIONAL
+========================================================= */
+
+.mascotas-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 28px;
+  color: #16324f;
+}
+
+/* =========================================================
+   ENCABEZADO
+========================================================= */
+
+.mascotas-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 26px;
+}
+
+.mascotas-header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 750;
+  letter-spacing: -0.5px;
+  color: #102a43;
+}
+
+.mascotas-header p {
+  margin: 8px 0 0;
+  color: #718096;
+  font-size: 14px;
+}
+
+/* =========================================================
+   BARRA DE BÚSQUEDA
+========================================================= */
+
+.mascotas-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.mascotas-search {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  padding: 0 18px;
+  border: 1px solid #dbe5ef;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #243b53;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.mascotas-search:focus {
+  border-color: #0f8b83;
+  box-shadow: 0 0 0 4px rgba(15, 139, 131, 0.10);
+}
+
+.mascotas-search::placeholder {
+  color: #94a3b8;
+}
+
+/* =========================================================
+   BOTONES
+========================================================= */
+
+.mascotas-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.mascotas-btn-primary {
+  background: #087f78;
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(8, 127, 120, 0.12);
+}
+
+.mascotas-btn-primary:hover {
+  background: #066b65;
+  box-shadow: 0 5px 12px rgba(8, 127, 120, 0.20);
+  transform: translateY(-1px);
+}
+
+.mascotas-btn-secondary {
+  background: #ffffff;
+  color: #334e68;
+  border-color: #dbe5ef;
+}
+
+.mascotas-btn-secondary:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.mascotas-btn-danger {
+  background: #ffffff;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+.mascotas-btn-danger:hover {
+  background: #fef2f2;
+}
+
+.mascotas-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================================================
+   ESTADÍSTICA
+========================================================= */
+
+.mascotas-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  width: 280px;
+  min-height: 105px;
+  padding: 22px;
+  margin-bottom: 26px;
+  background: #ffffff;
+  border: 1px solid #e3ebf4;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(15, 35, 65, 0.035);
+}
+
+.mascotas-stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  background: #dcfce7;
+  color: #087f78;
+  font-size: 24px;
+}
+
+.mascotas-stat-label {
+  color: #718096;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.mascotas-stat-value {
+  margin-top: 6px;
+  color: #102a43;
+  font-size: 28px;
+  font-weight: 750;
+}
+
+/* =========================================================
+   FORMULARIO
+========================================================= */
+
+.mascotas-form-card {
+  padding: 30px;
+  margin-bottom: 28px;
+  background: #ffffff;
+  border: 1px solid #e3ebf4;
+  border-radius: 18px;
+  box-shadow: 0 8px 26px rgba(15, 35, 65, 0.045);
+  animation: mascotasEntrada 0.25s ease;
+}
+
+@keyframes mascotasEntrada {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Cabecera del formulario */
+
+.mascotas-form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.mascotas-form-header h2 {
+  margin: 0;
+  color: #102a43;
+  font-size: 21px;
+  font-weight: 750;
+}
+
+/* Distribución de campos */
+
+.mascotas-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 26px;
+  row-gap: 22px;
+  align-items: start;
+}
+
+.mascotas-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 0;
+}
+
+.mascotas-form-group label {
+  display: block;
+  color: #334e68;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+/* Inputs, select y textarea */
+
+.mascotas-form-group input,
+.mascotas-form-group select,
+.mascotas-form-group textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  padding: 12px 14px;
+  border: 1px solid #dbe5ef;
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: #243b53;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.mascotas-form-group input::placeholder,
+.mascotas-form-group textarea::placeholder {
+  color: #a0aec0;
+}
+
+.mascotas-form-group input:hover,
+.mascotas-form-group select:hover,
+.mascotas-form-group textarea:hover {
+  border-color: #c4d3e2;
+}
+
+.mascotas-form-group input:focus,
+.mascotas-form-group select:focus,
+.mascotas-form-group textarea:focus {
+  border-color: #0f8b83;
+  box-shadow: 0 0 0 4px rgba(15, 139, 131, 0.10);
+  background-color: #ffffff;
+}
+
+/* Selectores */
+
+.mascotas-form-group select {
+  cursor: pointer;
+}
+
+/* Fecha */
+
+.mascotas-form-group input[type="date"] {
+  color: #475569;
+  cursor: pointer;
+}
+
+/* Peso */
+
+.mascotas-form-group input[type="number"] {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Observaciones */
+
+.mascotas-form-group textarea {
+  min-height: 125px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+/* Campo a ancho completo */
+
+.mascotas-form-group-full {
+  grid-column: 1 / -1;
+}
+
+/* Botones del formulario */
+
+.mascotas-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 30px;
+  padding-top: 22px;
+  border-top: 1px solid #edf2f7;
+}
+
+/* =========================================================
+   TABLA DE MASCOTAS
+========================================================= */
+
+.mascotas-table-card {
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e3ebf4;
+  border-radius: 17px;
+  box-shadow: 0 5px 20px rgba(15, 35, 65, 0.035);
+}
+
+.mascotas-table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 26px;
+  border-bottom: 1px solid #e8eef5;
+}
+
+.mascotas-table-header h2 {
+  margin: 0;
+  color: #102a43;
+  font-size: 17px;
+  font-weight: 750;
+}
+
+.mascotas-table-header span {
+  padding: 6px 11px;
+  border-radius: 20px;
+  background: #f0fdfa;
+  color: #087f78;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.mascotas-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.mascotas-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  white-space: nowrap;
+}
+
+.mascotas-table thead {
+  background: #f8fafc;
+}
+
+.mascotas-table th {
+  padding: 16px 20px;
+  text-align: left;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.45px;
+  border-bottom: 1px solid #e5edf5;
+}
+
+.mascotas-table td {
+  padding: 17px 20px;
+  color: #42566c;
+  font-size: 13px;
+  border-bottom: 1px solid #edf2f7;
+  vertical-align: middle;
+}
+
+.mascotas-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.mascotas-table tbody tr:hover {
+  background: #f8fbfd;
+}
+
+.mascotas-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* =========================================================
+   IDENTIFICACIÓN DE MASCOTA
+========================================================= */
+
+.mascotas-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.mascotas-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 13px;
+  background: #e0f2fe;
+  color: #0284c7;
+  font-size: 21px;
+}
+
+.mascotas-name {
+  color: #16324f;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.mascotas-subtext {
+  margin-top: 5px;
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+/* =========================================================
+   ACCIONES DE TABLA
+========================================================= */
+
+.mascotas-actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.mascotas-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border: 1px solid #dbe5ef;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #64748b;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mascotas-action-btn:hover {
+  color: #087f78;
+  border-color: #99d5ce;
+  background: #f0fdfa;
+}
+
+.mascotas-action-btn.delete:hover {
+  color: #dc2626;
+  border-color: #fecaca;
+  background: #fef2f2;
+}
+
+/* =========================================================
+   MENSAJES
+========================================================= */
+
+.mascotas-empty {
+  padding: 50px 20px !important;
+  text-align: center !important;
+  color: #94a3b8 !important;
+  font-size: 14px !important;
+}
+
+.mascotas-error {
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  border: 1px solid #fecaca;
+  border-radius: 11px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.mascotas-success {
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  border: 1px solid #bbf7d0;
+  border-radius: 11px;
+  background: #f0fdf4;
+  color: #15803d;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   RESPONSIVE - TABLETS
+========================================================= */
+
+@media (max-width: 1100px) {
+  .mascotas-container {
+    padding: 22px;
+  }
+
+  .mascotas-form-card {
+    padding: 24px;
+  }
+
+  .mascotas-form-grid {
+    column-gap: 20px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE - MÓVILES
+========================================================= */
+
+@media (max-width: 700px) {
+  .mascotas-container {
+    padding: 16px;
+  }
+
+  .mascotas-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .mascotas-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .mascotas-search {
+    flex-basis: 100%;
+  }
+
+  .mascotas-toolbar .mascotas-btn {
+    flex: 1;
+  }
+
+  .mascotas-stat-card {
+    width: 100%;
+  }
+
+  .mascotas-form-card {
+    padding: 20px;
+    border-radius: 14px;
+  }
+
+  .mascotas-form-grid {
+    grid-template-columns: 1fr;
+    row-gap: 18px;
+  }
+
+  .mascotas-form-group-full {
+    grid-column: auto;
+  }
+
+  .mascotas-form-header {
+    margin-bottom: 22px;
+  }
+
+  .mascotas-form-header h2 {
+    font-size: 18px;
+  }
+
+  .mascotas-form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .mascotas-form-actions .mascotas-btn {
+    width: 100%;
+  }
+
+  .mascotas-table-header {
+    padding: 18px;
+  }
+
+  .mascotas-table th,
+  .mascotas-table td {
+    padding: 14px 16px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE - MÓVILES PEQUEÑOS
+========================================================= */
+
+@media (max-width: 420px) {
+  .mascotas-container {
+    padding: 12px;
+  }
+
+  .mascotas-form-card {
+    padding: 16px;
+  }
+
+  .mascotas-header h1 {
+    font-size: 23px;
+  }
+
+  .mascotas-table-header h2 {
+    font-size: 15px;
+  }
+}

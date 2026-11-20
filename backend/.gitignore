@@ -1,0 +1,15 @@
+# Dependencias
+node_modules/
+
+# Archivos generados
+dist/
+build/
+
+# Variables de entorno y secretos
+.env
+.env.*
+!.env.example
+
+# Registros
+*.log
+npm-debug.log*

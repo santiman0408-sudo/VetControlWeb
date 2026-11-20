@@ -1,0 +1,477 @@
+/* ================================
+   PROPIETARIOS
+================================ */
+
+.propietarios-page {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.propietarios-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.propietarios-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0 14px;
+  height: 44px;
+  flex: 1;
+  min-width: 240px;
+  color: #64748b;
+}
+
+.propietarios-search input {
+  border: none;
+  outline: none;
+  width: 100%;
+  background: transparent;
+  font-size: 14px;
+  color: #334155;
+}
+
+.propietarios-refresh,
+.propietarios-new {
+  height: 44px;
+  border-radius: 10px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.propietarios-refresh {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #334155;
+}
+
+.propietarios-new {
+  background: #0f766e;
+  border: 1px solid #0f766e;
+  color: #ffffff;
+}
+
+.propietarios-new:hover {
+  background: #115e59;
+}
+
+.propietarios-summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 20px;
+  width: fit-content;
+  min-width: 230px;
+}
+
+.propietarios-summary-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #ccfbf1;
+  color: #0f766e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.propietarios-summary div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.propietarios-summary span {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.propietarios-summary strong {
+  font-size: 26px;
+  color: #0f172a;
+}
+
+.propietarios-table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+}
+
+.propietarios-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.propietarios-table th {
+  text-align: left;
+  padding: 16px;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.propietarios-table td {
+  padding: 16px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+  font-size: 14px;
+}
+
+.propietarios-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.propietario-name,
+.propietario-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.propietario-name strong {
+  color: #0f172a;
+}
+
+.propietario-name span {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.propietario-contact span,
+.propietario-address {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.propietarios-empty {
+  text-align: center;
+  padding: 40px !important;
+  color: #94a3b8 !important;
+}
+
+.propietarios-error {
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  font-size: 14px;
+}
+
+.propietarios-footer {
+  font-size: 13px;
+  color: #64748b;
+}
+
+@media (max-width: 768px) {
+  .propietarios-toolbar {
+    align-items: stretch;
+  }
+
+  .propietarios-search {
+    flex-basis: 100%;
+  }
+
+  .propietarios-refresh,
+  .propietarios-new {
+    flex: 1;
+  }
+}
+
+
+/* ==========================================
+   MODAL - REGISTRO DE PROPIETARIOS
+========================================== */
+
+.propietarios-success {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+  font-size: 14px;
+}
+
+.propietarios-success button {
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+}
+
+.propietarios-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+.propietarios-modal {
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 25px 70px rgba(15, 23, 42, 0.25);
+  animation: propietarios-modal-entrada 0.2s ease-out;
+}
+
+@keyframes propietarios-modal-entrada {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.propietarios-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.propietarios-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.propietarios-modal-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #ccfbf1;
+  color: #0f766e;
+}
+
+.propietarios-modal-title h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.propietarios-modal-title p {
+  margin: 5px 0 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.propietarios-modal-close {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  background: #f1f5f9;
+  color: #64748b;
+  cursor: pointer;
+}
+
+.propietarios-modal-close:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.propietarios-modal-body {
+  padding: 24px;
+}
+
+.propietarios-form-section {
+  margin-bottom: 22px;
+}
+
+.propietarios-form-section h3 {
+  margin: 0;
+  font-size: 15px;
+  color: #0f172a;
+}
+
+.propietarios-form-section p {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.propietarios-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.propietarios-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.propietarios-form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.propietarios-form-group input {
+  width: 100%;
+  height: 44px;
+  padding: 0 13px;
+  border: 1px solid #dbe3ed;
+  border-radius: 9px;
+  outline: none;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.propietarios-form-group input::placeholder {
+  color: #94a3b8;
+}
+
+.propietarios-form-group input:focus {
+  border-color: #0f766e;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+}
+
+.propietarios-form-error {
+  margin-top: 20px;
+  padding: 12px 14px;
+  border-radius: 9px;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  font-size: 13px;
+}
+
+.propietarios-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 20px 24px;
+  border-top: 1px solid #e5e7eb;
+  background: #f8fafc;
+  border-radius: 0 0 18px 18px;
+}
+
+.propietarios-btn-cancel,
+.propietarios-btn-save {
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 18px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.propietarios-btn-cancel {
+  background: #ffffff;
+  border: 1px solid #dbe3ed;
+  color: #475569;
+}
+
+.propietarios-btn-cancel:hover {
+  background: #f1f5f9;
+}
+
+.propietarios-btn-save {
+  background: #0f766e;
+  border: 1px solid #0f766e;
+  color: #ffffff;
+}
+
+.propietarios-btn-save:hover {
+  background: #115e59;
+}
+
+.propietarios-btn-save:disabled,
+.propietarios-btn-cancel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.icon-spin {
+  animation: propietarios-spin 1s linear infinite;
+}
+
+@keyframes propietarios-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .propietarios-modal-overlay {
+    padding: 12px;
+  }
+
+  .propietarios-modal-header,
+  .propietarios-modal-body {
+    padding: 18px;
+  }
+
+  .propietarios-form-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .propietarios-modal-footer {
+    padding: 16px 18px;
+  }
+
+  .propietarios-btn-cancel,
+  .propietarios-btn-save {
+    flex: 1;
+    padding: 0 10px;
+  }
+}
