@@ -115,25 +115,29 @@ cd backend
 npm install
 ```
 
-Crear el archivo `.env` dentro de `backend/` y configurar las variables de entorno:
+Crear el archivo .env utilizando la plantilla .env.example.
 
-```env
+En PowerShell, ejecutar:
+
+Copy-Item .env.example .env
+
+Abrir el archivo .env y configurar los valores correspondientes al entorno local:
+
 PORT=4000
 NODE_ENV=development
 
 DB_HOST=127.0.0.1
-DB_PORT=3306
+DB_PORT=3307
 DB_USER=root
 DB_PASSWORD=TU_PASSWORD_MYSQL
 DB_DATABASE=vetcontrol_web
 
 FRONTEND_URL=http://localhost:5173
 
-JWT_SECRET=REEMPLAZAR_POR_UN_SECRETO_SEGuro
+JWT_SECRET=REEMPLAZAR_POR_UN_SECRETO_SEGURO
 JWT_EXPIRES_IN=8h
-```
 
-**Importante:** reemplazar los valores de ejemplo por la configuración local. No publicar contraseñas ni secretos reales.
+Importante: reemplazar los valores de ejemplo por la configuración local. No publicar contraseñas ni secretos reales. El archivo .env está excluido del repositorio mediante .gitignore.
 
 Iniciar el backend:
 
