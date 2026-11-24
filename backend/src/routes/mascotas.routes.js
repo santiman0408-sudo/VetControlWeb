@@ -1,10 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
+// ============================================
+// CONTROLADOR DEL MÓDULO MASCOTAS
+// ============================================
 const mascotasController = require('../controllers/mascotas.controller');
 
+// ============================================
+// MIDDLEWARE DE AUTENTICACIÓN Y AUTORIZACIÓN
+// ============================================
 const {
-    verificarToken
+    verificarToken,
+    verificarRol
 } = require('../middleware/auth.middleware');
 
 // ============================================
@@ -12,18 +19,49 @@ const {
 // ============================================
 
 // LISTAR MASCOTAS
-router.get('/', verificarToken, mascotasController.listar);
+// ADMIN y RECEPCIONISTA
+router.get(
+    '/',
+    verificarToken,
+    mascotasController.listar
+);
 
 // CONSULTAR MASCOTA POR ID
-router.get('/:id', verificarToken, mascotasController.obtenerPorId);
+// ADMIN y RECEPCIONISTA
+router.get(
+    '/:id',
+    verificarToken,
+    mascotasController.obtenerPorId
+);
 
 // REGISTRAR MASCOTA
-router.post('/', verificarToken, mascotasController.registrar);
+// ADMIN y RECEPCIONISTA
+router.post(
+    '/',
+    verificarToken,
+    verificarRol('ADMIN', 'RECEPCIONISTA'),
+    mascotasController.registrar
+);
 
 // ACTUALIZAR MASCOTA
-router.put('/:id', verificarToken, mascotasController.actualizar);
+// ADMIN y RECEPCIONISTA
+router.put(
+    '/:id',
+    verificarToken,
+    verificarRol('ADMIN', 'RECEPCIONISTA'),
+    mascotasController.actualizar
+);
 
 // ELIMINAR MASCOTA
-router.delete('/:id', verificarToken, mascotasController.eliminar);
+// EXCLUSIVO ADMIN
+router.delete(
+    '/:id',
+    verificarToken,
+    verificarRol('ADMIN'),
+    mascotasController.eliminar
+);
 
+// ============================================
+// EXPORTAR RUTAS
+// ============================================
 module.exports = router;

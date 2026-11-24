@@ -9,10 +9,11 @@ const {
 } = require('../controllers/dashboard.controller');
 
 // ============================================
-// MIDDLEWARE DE AUTENTICACIÓN
+// MIDDLEWARE DE AUTENTICACIÓN Y AUTORIZACIÓN
 // ============================================
 const {
-    verificarToken
+    verificarToken,
+    verificarRol
 } = require('../middleware/auth.middleware');
 
 // ============================================
@@ -20,9 +21,11 @@ const {
 // ============================================
 
 // GET /api/dashboard/estadisticas
+// ADMIN y RECEPCIONISTA
 router.get(
     '/estadisticas',
     verificarToken,
+    verificarRol('ADMIN', 'RECEPCIONISTA'),
     obtenerEstadisticas
 );
 

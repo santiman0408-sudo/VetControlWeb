@@ -1,10 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
+// ============================================
+// CONTROLADOR DEL MÓDULO SERVICIOS
+// ============================================
 const serviciosController = require('../controllers/servicios.controller');
 
+// ============================================
+// MIDDLEWARE DE AUTENTICACIÓN Y AUTORIZACIÓN
+// ============================================
 const {
-    verificarToken
+    verificarToken,
+    verificarRol
 } = require('../middleware/auth.middleware');
 
 // ============================================
@@ -12,18 +19,49 @@ const {
 // ============================================
 
 // LISTAR SERVICIOS
-router.get('/', verificarToken, serviciosController.listar);
+// ADMIN y RECEPCIONISTA
+router.get(
+    '/',
+    verificarToken,
+    serviciosController.listar
+);
 
 // OBTENER SERVICIO POR ID
-router.get('/:id', verificarToken, serviciosController.obtenerPorId);
+// ADMIN y RECEPCIONISTA
+router.get(
+    '/:id',
+    verificarToken,
+    serviciosController.obtenerPorId
+);
 
 // REGISTRAR SERVICIO
-router.post('/', verificarToken, serviciosController.registrar);
+// EXCLUSIVO ADMIN
+router.post(
+    '/',
+    verificarToken,
+    verificarRol('ADMIN'),
+    serviciosController.registrar
+);
 
 // ACTUALIZAR SERVICIO
-router.put('/:id', verificarToken, serviciosController.actualizar);
+// EXCLUSIVO ADMIN
+router.put(
+    '/:id',
+    verificarToken,
+    verificarRol('ADMIN'),
+    serviciosController.actualizar
+);
 
 // ELIMINAR SERVICIO
-router.delete('/:id', verificarToken, serviciosController.eliminar);
+// EXCLUSIVO ADMIN
+router.delete(
+    '/:id',
+    verificarToken,
+    verificarRol('ADMIN'),
+    serviciosController.eliminar
+);
 
+// ============================================
+// EXPORTAR RUTAS
+// ============================================
 module.exports = router;
