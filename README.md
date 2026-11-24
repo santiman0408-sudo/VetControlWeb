@@ -58,6 +58,49 @@ El proyecto utiliza una arquitectura cliente-servidor:
 - **MySQL:** almacena la información del sistema.
 - **JWT:** permite autenticar las solicitudes protegidas.
 
+## Seguridad y control de acceso (RBAC)
+
+El backend implementa autenticación mediante JSON Web Token (JWT) y autorización basada en roles (RBAC). El middleware de autenticación valida el token y el middleware de autorización comprueba si el rol tiene permiso para ejecutar la operación solicitada.
+
+## Matriz de permisos y accesos (RBAC)
+
+La siguiente matriz muestra los permisos asignados a cada rol dentro del sistema VetControlWeb.
+
+| Módulo | ADMIN | RECEPCIONISTA |
+|---|---|---|
+| Dashboard | Consultar | Consultar |
+| Propietarios | Consultar, registrar, actualizar y eliminar | Consultar, registrar y actualizar |
+| Mascotas | Consultar, registrar, actualizar y eliminar | Consultar, registrar y actualizar |
+| Citas | Consultar, registrar, actualizar y eliminar | Consultar, registrar y actualizar |
+| Servicios | Consultar, registrar, actualizar y eliminar | Solo consultar |
+| Solicitudes | Consultar, registrar, actualizar y eliminar | Consultar, registrar y actualizar |
+
+### Consideraciones
+- **ADMIN:** Tiene acceso completo a todos los módulos y operaciones del sistema.
+- **RECEPCIONISTA:** Puede consultar, registrar y actualizar información, pero no puede eliminar registros.
+- **Servicios:** El RECEPCIONISTA únicamente tiene permiso de consulta.
+
+## Reglas de autorización y control de acceso (RBAC)
+
+El sistema VetControlWeb implementa un mecanismo de autorización basado en roles (RBAC), que permite controlar el acceso a los módulos y operaciones según los permisos asignados a cada usuario.
+
+## Reglas de autorización:
+
+- **Autenticación JWT:** Las rutas protegidas requieren un token JWT válido para permitir el acceso.
+
+- **Consultas:** Las operaciones de consulta de los módulos requieren autenticación.
+
+- **Propietarios, Mascotas, Citas y Solicitudes:** Los roles ADMIN y RECEPCIONISTA pueden consultar, registrar y actualizar información.
+
+- **Eliminación de registros:** Únicamente el rol ADMIN puede eliminar propietarios, mascotas, citas y solicitudes.
+
+- **Gestión de Servicios:** Las operaciones de registro, actualización y eliminación están reservadas exclusivamente al rol ADMIN. El RECEPCIONISTA solo puede consultar los servicios.
+
+- **Dashboard:** El acceso al panel de estadísticas está permitido a los roles ADMIN y RECEPCIONISTA.
+
+- **Registro de usuarios:** La creación de nuevas cuentas está restringida exclusivamente al rol ADMIN.
+
+**Objetivo:** Garantizar que cada usuario acceda únicamente a las funcionalidades autorizadas según su rol, protegiendo la integridad y seguridad de la información del sistema.
 ## Estructura del repositorio
 
 ```text
@@ -115,13 +158,13 @@ cd backend
 npm install
 ```
 
-Crear el archivo .env utilizando la plantilla .env.example.
+## Crear el archivo .env utilizando la plantilla .env.example.
 
-En PowerShell, ejecutar:
+## En PowerShell, ejecutar:
 
 Copy-Item .env.example .env
 
-Abrir el archivo .env y configurar los valores correspondientes al entorno local:
+## Abrir el archivo .env y configurar los valores correspondientes al entorno local:
 
 PORT=4000
 NODE_ENV=development
@@ -137,15 +180,15 @@ FRONTEND_URL=http://localhost:5173
 JWT_SECRET=REEMPLAZAR_POR_UN_SECRETO_SEGURO
 JWT_EXPIRES_IN=8h
 
-Importante: reemplazar los valores de ejemplo por la configuración local. No publicar contraseñas ni secretos reales. El archivo .env está excluido del repositorio mediante .gitignore.
+- **Importante:** reemplazar los valores de ejemplo por la configuración local. No publicar contraseñas ni secretos reales. El archivo .env está excluido del repositorio mediante .gitignore.
 
-Iniciar el backend:
+## Iniciar el backend:
 
 ```bash
 npm run dev
 ```
 
-El servidor estará disponible en:
+## El servidor estará disponible en:
 
 - API: `http://localhost:4000/api`
 - Estado: `http://localhost:4000/api/health`
@@ -160,13 +203,13 @@ npm install
 npm run dev
 ```
 
-Abrir la aplicación en:
+## Abrir la aplicación en:
 
 `http://localhost:5173`
 
 ### 4. Compilar el frontend
 
-Para comprobar la compilación de producción:
+## Para comprobar la compilación de producción:
 
 ```bash
 cd frontend
